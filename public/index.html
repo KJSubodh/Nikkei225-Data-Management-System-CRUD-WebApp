@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikkei 225 Data Management</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Nikkei 225</h2>
+        <p>Data Management</p>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li onclick="showTab('main')"><i class="fas fa-home"></i> Main Data</li>
+          <li onclick="showTab('divisor')"><i class="fas fa-calculator"></i> Divisor</li>
+          <li onclick="showTab('dividend')"><i class="fas fa-chart-line"></i> Dividend</li>
+          <li onclick="showTab('repo_rate')"><i class="fas fa-percentage"></i> Repo Rate</li>
+          <li onclick="showTab('funding_rate')"><i class="fas fa-coins"></i> Funding Rate</li>
+          <li onclick="showTab('future_price')"><i class="fas fa-chart-bar"></i> Future Price</li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <div class="auth-container">
+          <span id="user-info" style="display: none;"></span>
+          <button id="logout-btn" style="display: none;" type="button">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>                      
+        </div>
+      </header>
+
+      <section id="main" class="tab-content">
+        <div class="form-container">
+          <h2><i class="fas fa-database"></i> Main Data</h2>
+          <input type="text" id="mainUserName" placeholder="Username" />
+          <input type="text" id="mainDate" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="number" id="mainDivisor" placeholder="Divisor" />
+          <input type="number" id="mainDividend" placeholder="Dividend" />
+          <input type="number" id="mainRepoRate" placeholder="Repo Rate" />
+          <input type="number" id="mainFundingRate" placeholder="Funding Rate" />
+          <input type="text" id="mainFYR" placeholder="FYR" />
+          <input type="text" id="mainDateFormat" placeholder="YYYYMMDD" class="date-picker-format" />
+          <button onclick="saveMain()"><i class="fas fa-save"></i> Save</button>
+          <button onclick="loadMain()"><i class="fas fa-sync"></i> Load</button>
+          <button onclick="saveTableChanges('main', 'mainTable')">Save Table Changes</button>
+        </div>
+        <table class="data-table" id="mainTable">
+          <thead>
+            <tr>
+              <th>Sl No.</th>
+              <th>Username</th>
+              <th>Date</th>
+              <th>Divisor</th>
+              <th>Dividend</th>
+              <th>Repo Rate</th>
+              <th>Funding Rate</th>
+              <th>FYR</th>
+              <th>Date Format</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="divisor" class="tab-content" style="display: none;">
+        <div class="form-container">
+          <h2><i class="fas fa-calculator"></i> Divisor Data</h2>
+          <input type="text" id="divisorIndex" placeholder="Index" />
+          <input type="text" id="divisorFromDt" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="text" id="divisorToDt" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="number" id="divisorDivisor" placeholder="Divisor" />
+          <input type="text" id="divisorUpdateSource" placeholder="Update Source" />
+          <input type="text" id="fundingRateUpdateTime" placeholder="Update-Time: YYYY-MM-DD HH:mm" class="datetime-picker" />
+          <button onclick="saveDivisor()"><i class="fas fa-save"></i> Save</button>
+          <button onclick="loadDivisor()"><i class="fas fa-sync"></i> Load</button>
+          <button onclick="saveTableChanges('divisor', 'divisorTable')">Save Divisor Table Changes</button>
+        </div>
+        <table class="data-table" id="divisorTable">
+          <thead>
+            <tr>
+              <th>Sl No.</th>
+              <th>Index</th>
+              <th>From Date</th>
+              <th>To Date</th>
+              <th>Divisor</th>
+              <th>Update Source</th>
+              <th>Update Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="dividend" class="tab-content" style="display: none;">
+        <div class="form-container">
+          <h2><i class="fas fa-chart-line"></i> Dividend Data</h2>
+          <input type="text" id="dividendDt" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="text" id="dividendIndex" placeholder="Index" />
+          <input type="text" id="dividendDivDt" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="number" id="dividendDividend" placeholder="Dividend" />
+          <input type="text" id="dividendUpdateSource" placeholder="Update Source" />
+          <input type="text" id="fundingRateUpdateTime" placeholder="Update-Time: YYYY-MM-DD HH:mm" class="datetime-picker" />
+          <button onclick="saveDividend()"><i class="fas fa-save"></i> Save</button>
+          <button onclick="loadDividend()"><i class="fas fa-sync"></i> Load</button>
+          <button onclick="saveTableChanges('dividend', 'dividendTable')">Save Dividend Table Changes</button>
+        </div>
+        <table class="data-table" id="dividendTable">
+          <thead>
+            <tr>
+              <th>Sl No.</th>
+              <th>Date</th>
+              <th>Index</th>
+              <th>Dividend Date</th>
+              <th>Dividend</th>
+              <th>Update Source</th>
+              <th>Update Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="repo_rate" class="tab-content" style="display: none;">
+        <div class="form-container">
+          <h2><i class="fas fa-percentage"></i> Repo Rate Data</h2>
+          <input type="text" id="repoRateDt" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="text" id="repoRateIndex" placeholder="Index" />
+          <input type="text" id="repoRateTerm" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="number" id="repoRateBid" placeholder="Bid" />
+          <input type="number" id="repoRateOffer" placeholder="Offer" />
+          <input type="text" id="repoRateUpdateSource" placeholder="Update Source" />
+          <input type="text" id="fundingRateUpdateTime" placeholder="Update-Time: YYYY-MM-DD HH:mm" class="datetime-picker" />
+          <button onclick="saveRepoRate()"><i class="fas fa-save"></i> Save</button>
+          <button onclick="loadRepoRate()"><i class="fas fa-sync"></i> Load</button>
+          <button onclick="saveTableChanges('repo_rate', 'repoRateTable')">Save Repo Rate Table Changes</button>
+        </div>
+        <table class="data-table" id="repoRateTable">
+          <thead>
+            <tr>
+              <th>Sl No.</th>
+              <th>Date</th>
+              <th>Index</th>
+              <th>Term</th>
+              <th>Bid</th>
+              <th>Offer</th>
+              <th>Update Source</th>
+              <th>Update Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="funding_rate" class="tab-content" style="display: none;">
+        <div class="form-container">
+          <h2><i class="fas fa-coins"></i> Funding Rate Data</h2>
+          <input type="text" id="fundingRateDt" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="text" id="fundingRateIndex" placeholder="Index" />
+          <input type="text" id="fundingRateTerm" placeholder="YYYY-MM-DD" class="date-picker" />
+          <input type="number" id="fundingRateBid" placeholder="Bid" />
+          <input type="number" id="fundingRateOffer" placeholder="Offer" />
+          <input type="text" id="fundingRateUpdateSource" placeholder="Update Source" />
+          <input type="text" id="fundingRateUpdateTime" placeholder="Update-Time: YYYY-MM-DD HH:mm" class="datetime-picker" />
+          <button onclick="saveFundingRate()"><i class="fas fa-save"></i> Save</button>
+          <button onclick="loadFundingRate()"><i class="fas fa-sync"></i> Load</button>
+          <button onclick="saveTableChanges('funding_rate', 'fundingRateTable')">Save Funding Rate Table Changes</button>
+        </div>
+        <table class="data-table" id="fundingRateTable">
+          <thead>
+            <tr>
+              <th>Sl No.</th>
+              <th>Date</th>
+              <th>Index</th>
+              <th>Term</th>
+              <th>Bid</th>
+              <th>Offer</th>
+              <th>Update Source</th>
+              <th>Update Time</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="future_price" class="tab-content" style="display: none;">
+        <div class="form-container">
+          <h2><i class="fas fa-chart-bar"></i> Future Price Data</h2>
+          <input type="text" id="futurePriceParametersUse" placeholder="Parameters Use" />
+          <input type="text" id="futurePriceCalculationDetails" placeholder="Calculation Details" />
+          <button onclick="saveFuturePrice()"><i class="fas fa-save"></i> Save</button>
+          <button onclick="loadFuturePrice()"><i class="fas fa-sync"></i> Load</button>
+          <button onclick="saveTableChanges('future_price', 'futurePriceTable')">Save Future Price Table Changes</button>
+        </div>
+        <table class="data-table" id="futurePriceTable">
+          <thead>
+            <tr>
+              <th>Parameters Use</th>
+              <th>Calculation Details</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 Nikkei 225 Data Management. All rights reserved.</p>
+  </footer>
+
+  <div id="custom-context-menu" style="position: absolute; display: none; z-index: 1000; background: #fff; border: 1px solid #ccc; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
+    <ul style="list-style: none; margin: 0; padding: 5px 0;">
+      <li id="add-row-option" style="padding: 5px 10px; cursor: pointer;">Add Row</li>
+      <li id="delete-row-option" style="padding: 5px 10px; cursor: pointer;">Delete Row</li>
+      <li id="modify-row-option" style="padding: 5px 10px; cursor: pointer;">Modify Row</li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr(".date-picker-format", {
+      dateFormat: "Ymd"
+    });
+    flatpickr(".date-picker", {
+      dateFormat: "Y-m-d"
+    });
+    flatpickr(".datetime-picker", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+      time_24hr: true
+    });
+  </script>
+  <script src="script.js"></script>      
+</body>
+</html>
