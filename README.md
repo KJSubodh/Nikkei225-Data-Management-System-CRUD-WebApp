@@ -27,9 +27,7 @@ In addition, the web application features a **Custom Right-Click** context menu 
 
 ## Installation
 
-git clone https://github.com/KJSubodh/Nikkei225-Data-Management-System-CRUD-WebApp
-
-cd Nikkei225
+Download the project and install all the dependencies
 
 
 ## Install Dependencies:
