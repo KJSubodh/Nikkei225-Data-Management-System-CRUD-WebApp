@@ -84,7 +84,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd Nikkei225
+  cd Nikkei225-Data-Management-System-CRUD-WebApp
 ```
 
 Install dependencies
