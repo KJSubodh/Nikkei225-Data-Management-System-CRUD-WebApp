@@ -99,6 +99,33 @@ Start the server
   node server.js
 ```
 
+# Screenshots
+
+
+![Screenshot (78)](https://github.com/user-attachments/assets/86a12e41-35c8-4b93-a80e-97777900cdbf)
+
+
+![Screenshot (79)](https://github.com/user-attachments/assets/11efebe3-14db-4e22-868a-50468e1df7fa)
+
+
+![Screenshot (80)](https://github.com/user-attachments/assets/16877e9b-f5e7-47ed-95e8-5ac3f29991b3)
+
+
+![Screenshot (81)](https://github.com/user-attachments/assets/f985f922-4d1a-4f69-9949-cd12c9b0051b)
+
+
+![Screenshot (149)](https://github.com/user-attachments/assets/440a3d53-a311-45c2-be8e-d6227118cc48)
+
+
+![Screenshot (150)](https://github.com/user-attachments/assets/e9b595c4-6d3f-4221-9f01-e702d8a6352b)
+
+
+![Screenshot (151)](https://github.com/user-attachments/assets/7c93bc2f-3096-4efe-a1b9-876f7b23b34f)
+
+
+![Screenshot (152)](https://github.com/user-attachments/assets/0e2a9ffd-4ed2-4b8e-8a4f-25f2dea0d949)
+
+
 
 ## Authors
 
